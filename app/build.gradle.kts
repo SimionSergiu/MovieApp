@@ -1,11 +1,14 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-parcelize") //
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.example.movieapp"
     compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.example.movieapp"
@@ -35,7 +38,11 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
+    buildToolsVersion = "34.0.0"
+    
+    packagingOptions { resources.excludes.add("META-INF/*") }
 }
 
 dependencies {
@@ -48,7 +55,40 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.reflect)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.listenablefuture)
+
+    //coroutines
+    implementation(libs.kotlinx.coroutines.core.v173)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.rx2)
+
+    //dagger 2
+    implementation(libs.dagger)
+    implementation(libs.dagger.android)
+    implementation(libs.dagger.android.support)
+    kapt(libs.dagger.android.processor)
+    kapt(libs.dagger.compiler)
+
+    //data binding
+    implementation(libs.compiler)
+    implementation(libs.androidx.databinding.runtime)
+
+    //retrofit
+    implementation(libs.retrofit2.retrofit)
+    implementation (libs.google.gson)
+    implementation (libs.retrofit2.converter.gson)
+    //adapter delegates
+    implementation(libs.adapterdelegates4)
+
+    //glide
+    implementation(libs.glide)
+
+
 }

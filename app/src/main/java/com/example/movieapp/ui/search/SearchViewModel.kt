@@ -1,10 +1,13 @@
-package com.example.movieapp.ui.dashboard
+package com.example.movieapp.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class DashboardViewModel : ViewModel() {
+class SearchViewModel @Inject constructor(
+
+) : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
