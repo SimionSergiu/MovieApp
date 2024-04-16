@@ -1,13 +1,10 @@
 package com.example.movieapp.dependencyinjection
 
 import com.example.movieapp.MainActivity
+import com.example.movieapp.ui.details.MovieDetailsFragment
 import com.example.movieapp.ui.search.SearchFragment
 import com.example.movieapp.ui.home.HomeFragment
 import com.example.movieapp.ui.favorites.FavoritesFragment
-import com.example.movieapp.ui.home.tabs.nowplaying.NowPlayingFragment
-import com.example.movieapp.ui.home.tabs.popular.PopularFragment
-import com.example.movieapp.ui.home.tabs.toprated.TopRatedFragment
-import com.example.movieapp.ui.home.tabs.upcoming.UpcomingFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -20,10 +17,7 @@ interface ApplicationComponent {
     fun inject(homeFragment: HomeFragment)
     fun inject(favoritesFragment: FavoritesFragment)
     fun inject(searchFragment: SearchFragment)
-    fun inject(searchFragment: NowPlayingFragment)
-    fun inject(searchFragment: PopularFragment)
-    fun inject(searchFragment: TopRatedFragment)
-    fun inject(searchFragment: UpcomingFragment)
+    fun inject(movieDetailsFragment: MovieDetailsFragment)
 
 
 }

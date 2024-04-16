@@ -2,6 +2,7 @@ package com.example.movieapp.domain
 
 import com.example.movieapp.domain.model.MovieDetails
 import com.example.movieapp.domain.model.Movie
+import com.example.movieapp.domain.model.ResultPage
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -9,17 +10,17 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieDbApiService {
-    @GET("/movie/{recommendation_type}")
+    @GET("movie/{recommendation_type}")
     suspend fun getMovieByType(
         @Path("recommendation_type") recommendationType: String,
         @Query("api_key") api_key: String
-    ): List<Movie>
+    ): ResultPage
 
-    @GET("/search/movie")
+    @GET("search/movie")
     suspend fun searchMovies(
         @Query("query") query: String,
         @Query("api_key") api_key: String
-    ): List<Movie>
+    ): ResultPage
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(

@@ -5,25 +5,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapp.MovieApplication
+import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentSearchBinding
+import com.example.movieapp.ui.home.adapter.MovieAdapter
+import com.example.movieapp.ui.home.adapter.MovieClickListener
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), MovieClickListener {
 
-    private var _binding: FragmentSearchBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentSearchBinding
+    private var adapter: MovieAdapter = MovieAdapter(this)
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: SearchViewModel by viewModels<SearchViewModel> {  viewModelFactory  }
+    private val viewModel: SearchViewModel by viewModels<SearchViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
         (context.applicationContext as MovieApplication).appComponent.inject(this)
@@ -35,19 +39,61 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        setupSearchView()
+        observeEvents()
+        setupRecyclerView()
+        return binding.root
+    }
 
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        viewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    private fun setupRecyclerView() {
+        binding.rvSearch.apply {
+            layoutManager = GridLayoutManager(this@SearchFragment.context, 2)
+            adapter = this@SearchFragment.adapter
         }
-        return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun observeEvents() {
+        viewModel.movies.observe(viewLifecycleOwner) {
+            adapter.updateItems(it)
+        }
+        viewModel.showSnackBarError.observe(viewLifecycleOwner) {
+            val view = this.view ?: return@observe
+            if (it == true) {
+                Snackbar.make(view, getString(R.string.something_went_wrong), Snackbar.LENGTH_LONG)
+                    .show()
+            }
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.pb.visibility = if (it) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
     }
+
+    private fun setupSearchView() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val query = newText ?: return true
+                if (query.length > 1) {
+                    viewModel.searchForMovies(query)
+                }
+                return true
+            }
+        })
+    }
+
+    override fun onCardClicked(movieId: Int) {
+        val bundle = Bundle()
+        bundle.putInt("movieId", movieId)
+        findNavController().navigate(R.id.action_search_to_movie_details, bundle)
+    }
+
 }

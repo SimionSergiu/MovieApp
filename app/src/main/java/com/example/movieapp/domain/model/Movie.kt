@@ -1,5 +1,7 @@
 package com.example.movieapp.domain.model
 
+import com.example.movieapp.ui.home.items.MovieItem
+import com.example.movieapp.ui.utils.getCalendar
 import com.google.gson.annotations.SerializedName
 
 data class Movie(
@@ -18,3 +20,15 @@ data class Movie(
     @SerializedName("vote_average") val voteAverage: Double,
     @SerializedName("vote_count") val voteCount: Int
 )
+fun Movie.toMovieItem() : MovieItem {
+    val dateCalendar = getCalendar(this.releaseDate)
+
+    return MovieItem(
+        id = this.id,
+        title = this.title,
+        dateCalendar = dateCalendar,
+        backdropPath = this.backdropPath,
+        voteAverage = this.voteAverage,
+        posterPath = this. posterPath,
+    )
+}

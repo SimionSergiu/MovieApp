@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_favorites">Favorites</string>
+    <string name="title_movie_details">MovieDetails</string>
 
     <string name="home_tab_now_playing">Now Playing</string>
     <string name="home_tab_popular">Popular</string>
@@ -10,5 +11,17 @@
     <string name="home_tab_upcoming">Upcoming</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="rating_ascending">Rating ascending</string>
+    <string name="rating_descending">Rating ascending</string>
+    <string name="release_date_ascending">Release date ascending</string>
+    <string name="release_date_descending">Release date descending</string>
+    <string name="overview">Overview</string>
+    <string name="released_in">Released in %1$s</string>
+    <string name="rating">%1$s/10</string>
+
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="search_a_movie">Search a movie</string>
 
 </resources>

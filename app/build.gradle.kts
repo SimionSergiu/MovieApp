@@ -5,6 +5,7 @@ plugins {
     id("kotlin-kapt")
 }
 
+
 android {
     namespace = "com.example.movieapp"
     compileSdk = 34
@@ -12,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.movieapp"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -84,11 +85,8 @@ dependencies {
     implementation(libs.retrofit2.retrofit)
     implementation (libs.google.gson)
     implementation (libs.retrofit2.converter.gson)
-    //adapter delegates
-    implementation(libs.adapterdelegates4)
 
     //glide
     implementation(libs.glide)
-
 
 }
