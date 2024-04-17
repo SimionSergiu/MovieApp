@@ -42,7 +42,7 @@ class HomeViewModel @Inject constructor(
                 }
                 .onSuccess { response ->
                     _isLoading.value = false
-                    _moviesItems.value =  response.movies.map { it.toMovieItem() }
+                    _moviesItems.value = response.movies.map { it.toMovieItem() }
                 }
         }
 

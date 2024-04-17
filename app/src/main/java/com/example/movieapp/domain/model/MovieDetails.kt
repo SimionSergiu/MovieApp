@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class MovieDetails(
     @SerializedName("adult") val isAdult: Boolean,
     @SerializedName("backdrop_path") val backdropPath: String?,
-    @SerializedName("belongs_to_collection") val belongsToCollection: BelongsToCollection?, // Can be a more specific type if known
+    @SerializedName("belongs_to_collection") val belongsToCollection: BelongsToCollection?,
     @SerializedName("budget") val budget: Long,
     @SerializedName("genres") val genres: List<Genre>,
     @SerializedName("homepage") val homepage: String,

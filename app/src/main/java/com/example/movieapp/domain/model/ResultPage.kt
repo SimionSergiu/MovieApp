@@ -8,8 +8,3 @@ data class ResultPage(
     @SerializedName("total_pages") val totalPages: Int,
     @SerializedName("total_results") val totalResults: Int
 )
-
-data class Dates(
-    @SerializedName("maximum") val maximum: String,
-    @SerializedName("minimum") val minimum: String
-)

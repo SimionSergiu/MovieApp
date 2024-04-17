@@ -23,7 +23,7 @@ class FavoritesFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: FavoritesViewModel by viewModels<FavoritesViewModel> {  viewModelFactory  }
+    private val viewModel: FavoritesViewModel by viewModels<FavoritesViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
         (context.applicationContext as MovieApplication).appComponent.inject(this)

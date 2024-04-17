@@ -17,7 +17,7 @@ class MovieDetailsViewModel @Inject constructor(
     private val _movieDetails = MutableLiveData<MovieDetails>()
     val movieDetails: LiveData<MovieDetails> = _movieDetails
 
-    private val _showSnackBarError = MutableLiveData<Boolean>(false)
+    private val _showSnackBarError = MutableLiveData(false)
     val showSnackBarError: LiveData<Boolean> = _showSnackBarError
 
     fun fetchMovieDetails(movieId: Int) {
@@ -27,7 +27,7 @@ class MovieDetailsViewModel @Inject constructor(
                     _showSnackBarError.value = true
                 }
                 .onSuccess {
-                   _movieDetails.value =  it.movieDetails
+                    _movieDetails.value = it.movieDetails
                 }
         }
     }

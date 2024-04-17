@@ -87,12 +87,12 @@ class MovieDetailsFragment : Fragment() {
             binding.apply {
                 setTextViews(movieDetails)
                 binding.chipGroup.apply {
-                    val generes = if (movieDetails.genres.size >= 2) {
+                    val genres = if (movieDetails.genres.size >= 2) {
                         movieDetails.genres.subList(0, 2)
                     } else {
                         movieDetails.genres
                     }
-                    generes.forEach {
+                    genres.forEach {
                         val chip = Chip(context)
                         chip.text = it.name
                         chip.isClickable = false

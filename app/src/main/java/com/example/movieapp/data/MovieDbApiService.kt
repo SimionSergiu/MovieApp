@@ -13,19 +13,19 @@ interface MovieDbApiService {
     @GET("movie/{recommendation_type}")
     suspend fun getMovieByType(
         @Path("recommendation_type") recommendationType: String,
-        @Query("api_key") api_key: String
+        @Query("api_key") apiKey: String
     ): ResultPage
 
     @GET("search/movie")
     suspend fun searchMovies(
         @Query("query") query: String,
-        @Query("api_key") api_key: String
+        @Query("api_key") apiKey: String
     ): ResultPage
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int,
-        @Query("api_key") api_key: String
+        @Query("api_key") apiKey: String
     ): MovieDetails
 
     companion object {

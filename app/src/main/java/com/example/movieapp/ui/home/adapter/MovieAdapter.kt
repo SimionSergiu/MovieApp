@@ -1,11 +1,12 @@
 package com.example.movieapp.ui.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.ui.home.items.MovieItem
 
 class MovieAdapter(
-    val movieClickListener: MovieClickListener
+    private val movieClickListener: MovieClickListener
 ) : RecyclerView.Adapter<MovieViewHolder>() {
     private var movieItems: List<MovieItem> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -21,6 +22,7 @@ class MovieAdapter(
         return movieItems.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateItems(newItems: List<MovieItem>) {
         movieItems = newItems
         notifyDataSetChanged()
