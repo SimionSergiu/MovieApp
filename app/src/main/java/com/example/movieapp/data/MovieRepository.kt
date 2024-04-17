@@ -1,11 +1,8 @@
 package com.example.movieapp.data
 
 import com.example.movieapp.domain.Constants
-import com.example.movieapp.domain.MovieDbApiService
 import com.example.movieapp.domain.model.MovieDetails
-import com.example.movieapp.domain.model.Movie
 import com.example.movieapp.domain.model.ResultPage
-import com.example.movieapp.domain.movie.MovieDataSource
 import com.example.movieapp.domain.movie.RecommendationType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

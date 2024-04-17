@@ -41,7 +41,8 @@ import javax.inject.Inject
 
 class MovieDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentMovieDetailsBinding
+    private var _binding: FragmentMovieDetailsBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -63,7 +64,7 @@ class MovieDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
         val argValue = arguments?.getInt("movieId")
         if (argValue != null) {
             viewModel.fetchMovieDetails(movieId = argValue)
@@ -79,12 +80,6 @@ class MovieDetailsFragment : Fragment() {
         binding.ivClose.setOnClickListener {
             this.findNavController().popBackStack()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        val activity = requireActivity() as AppCompatActivity
-        activity.supportActionBar?.show()
     }
 
     private fun observeEvents() {
@@ -145,4 +140,11 @@ class MovieDetailsFragment : Fragment() {
             .into(view)
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+        val activity = requireActivity() as AppCompatActivity
+        activity.supportActionBar?.show()
+    }
 }

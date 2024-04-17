@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapp.MovieApplication
 import com.example.movieapp.R
+import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.databinding.FragmentSearchBinding
 import com.example.movieapp.ui.home.adapter.MovieAdapter
 import com.example.movieapp.ui.home.adapter.MovieClickListener
@@ -22,8 +23,9 @@ import javax.inject.Inject
 
 class SearchFragment : Fragment(), MovieClickListener {
 
-    private lateinit var binding: FragmentSearchBinding
+    private var _binding: FragmentSearchBinding? = null
     private var adapter: MovieAdapter = MovieAdapter(this)
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -39,7 +41,7 @@ class SearchFragment : Fragment(), MovieClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
         setupSearchView()
         observeEvents()
         setupRecyclerView()
@@ -94,6 +96,11 @@ class SearchFragment : Fragment(), MovieClickListener {
         val bundle = Bundle()
         bundle.putInt("movieId", movieId)
         findNavController().navigate(R.id.action_search_to_movie_details, bundle)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

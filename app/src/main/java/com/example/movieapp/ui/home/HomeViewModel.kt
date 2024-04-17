@@ -30,9 +30,6 @@ class HomeViewModel @Inject constructor(
     private val _moviesItems = MutableLiveData<List<MovieItem>>(mutableListOf())
     val moviesItems: LiveData<List<MovieItem>> = _moviesItems
 
-    private val _sortedMoviesItems = MutableLiveData<List<MovieItem>>(mutableListOf())
-    val sortedMoviesItems: LiveData<List<MovieItem>> = _sortedMoviesItems
-
     fun updateItemsForTab(position: Int?) {
         viewModelScope.launch {
             _isLoading.value = true
@@ -64,21 +61,21 @@ class HomeViewModel @Inject constructor(
 
     fun sortMoviesRatingAscending() {
         val items = _moviesItems.value ?: emptyList()
-        _sortedMoviesItems.value = items.sortedBy { it.voteAverage }
+        _moviesItems.value = items.sortedBy { it.voteAverage }
     }
 
     fun sortMoviesRatingDescending() {
         val items = _moviesItems.value ?: emptyList()
-        _sortedMoviesItems.value = items.sortedByDescending { it.voteAverage }
+        _moviesItems.value = items.sortedByDescending { it.voteAverage }
     }
 
     fun sortMoviesReleaseDateAscending() {
         val items = _moviesItems.value ?: emptyList()
-        _sortedMoviesItems.value = items.sortedBy { it.dateCalendar?.time }
+        _moviesItems.value = items.sortedBy { it.dateCalendar?.time }
     }
 
     fun sortMoviesReleaseDateDescending() {
         val items = _moviesItems.value ?: emptyList()
-        _sortedMoviesItems.value = items.sortedByDescending { it.dateCalendar?.time }
+        _moviesItems.value = items.sortedByDescending { it.dateCalendar?.time }
     }
 }

@@ -1,6 +1,6 @@
 package com.example.movieapp.dependencyinjection
 
-import com.example.movieapp.domain.MovieDbApiService
+import com.example.movieapp.data.MovieDbApiService
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

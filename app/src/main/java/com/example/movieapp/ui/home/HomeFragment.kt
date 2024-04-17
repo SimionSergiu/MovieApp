@@ -25,7 +25,8 @@ import javax.inject.Inject
 
 class HomeFragment : Fragment(), TabLayout.OnTabSelectedListener, MovieClickListener {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -64,7 +65,7 @@ class HomeFragment : Fragment(), TabLayout.OnTabSelectedListener, MovieClickList
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         setupTabLayout()
         setupRecyclerView()
         observeEvents()
@@ -81,10 +82,6 @@ class HomeFragment : Fragment(), TabLayout.OnTabSelectedListener, MovieClickList
 
     private fun observeEvents() {
         viewModel.moviesItems.observe(viewLifecycleOwner) {
-            adapter.updateItems(it)
-        }
-
-        viewModel.sortedMoviesItems.observe(viewLifecycleOwner) {
             adapter.updateItems(it)
         }
 
@@ -133,4 +130,10 @@ class HomeFragment : Fragment(), TabLayout.OnTabSelectedListener, MovieClickList
         bundle.putInt("movieId", movieId)
         findNavController().navigate(R.id.action_home_to_movie_details, bundle)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }

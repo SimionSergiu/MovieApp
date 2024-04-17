@@ -1,9 +1,8 @@
-package com.example.movieapp.domain.movie
+package com.example.movieapp.data
 
 import com.example.movieapp.domain.model.MovieDetails
-import com.example.movieapp.domain.model.Movie
 import com.example.movieapp.domain.model.ResultPage
-import retrofit2.http.Query
+import com.example.movieapp.domain.movie.RecommendationType
 
 interface MovieDataSource {
     suspend fun getMovieByRecommendationType(recommendationType: RecommendationType): ResultPage

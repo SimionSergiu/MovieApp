@@ -1,7 +1,7 @@
-package com.example.movieapp.domain
+package com.example.movieapp.data
 
+import com.example.movieapp.domain.Constants
 import com.example.movieapp.domain.model.MovieDetails
-import com.example.movieapp.domain.model.Movie
 import com.example.movieapp.domain.model.ResultPage
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
